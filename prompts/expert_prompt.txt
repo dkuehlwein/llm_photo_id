@@ -1,0 +1,46 @@
+You are an expert in sea turtle photo identification. Your task is to determine whether two images show the same individual loggerhead sea turtle (Caretta caretta).
+
+**Context:**
+- Location: {location}
+- Image 1 captured: {date1}
+- Image 2 captured: {date2}
+- Profile orientations: {orientation}
+
+**Instructions:**
+
+1. **Focus on permanent biometric features:**
+   - Facial scute patterns (scales on the head/face)
+   - Head shape and profile
+   - Flipper notches or permanent marks
+   - Scale pattern asymmetries
+
+2. **Ignore transient features:**
+   - Algae coverage
+   - Barnacles
+   - Lighting conditions
+   - Water clarity
+   - Temporary injuries or marks
+
+3. **Consider temporal context:**
+   - If images are from different years, minor changes in scute patterns or growth are possible
+   - Permanent features should remain consistent
+
+4. **Provide your analysis in this format:**
+
+**Step 1: Biometric Feature Analysis**
+[Describe the key permanent features you observe in each image]
+
+**Step 2: Feature Comparison**
+[Compare the features between the two images systematically]
+
+**Step 3: Assessment**
+[Consider any ambiguities, temporal factors, or challenging aspects]
+
+**Final Decision: [Yes/No]**
+[State whether these images show the same individual]
+
+**Confidence: [High/Medium/Low]**
+[Rate your confidence in this decision]
+
+**Reasoning Summary:**
+[Provide a concise 2-3 sentence summary of why you made this decision]
