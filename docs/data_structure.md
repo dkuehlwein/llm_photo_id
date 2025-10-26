@@ -61,8 +61,8 @@ data/
 
 **High similarity, correct match:** MD correctly assigns high similarity to same individual
 **High similarity, wrong match:** MD incorrectly assigns high similarity to different individuals
-**Low similarity, correct match:** MD correctly assigns low similarity to different individuals
-**Low similarity, wrong match:** MD incorrectly assigns low similarity to same individual
+**Low similarity, correct match:** MD correctly assigns low similarity to same individuals
+**Low similarity, wrong match:** MD incorrectly assigns low similarity to different individual
 
 ## Metadata Format
 
