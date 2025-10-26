@@ -75,18 +75,14 @@ def create_pairs_metadata():
 
             # Determine ground truth
             is_correct = "correct" in category
-            is_high_sim = "High_similarity" in category
             is_same_orientation = "same_orientiation" in category
 
             # Ground truth: same individual or not?
-            if is_correct and is_high_sim:
-                ground_truth = "same"  # High sim, correct = same individual
-            elif is_correct and not is_high_sim:
-                ground_truth = "different"  # Low sim, correct = different individuals
-            elif not is_correct and is_high_sim:
-                ground_truth = "different"  # High sim, wrong = different individuals
-            else:  # not is_correct and not is_high_sim
-                ground_truth = "same"  # Low sim, wrong = same individual
+            # "correct_match" = same individual, "wrong_match" = different individuals
+            if is_correct:
+                ground_truth = "same"  # correct_match = same individual
+            else:
+                ground_truth = "different"  # wrong_match = different individuals
 
             # Orientation description
             if is_same_orientation:
