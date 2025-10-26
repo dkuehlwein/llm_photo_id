@@ -14,15 +14,22 @@ from .base import BaseLLMClient
 class GeminiClient(BaseLLMClient):
     """Client for Google Gemini API."""
 
-    def __init__(self, api_key: str = None, model_name: str = "models/gemini-2.0-flash-exp", temperature: float = 0.0):
+    def __init__(self, api_key: str = None, model_name: str = None, temperature: float = 0.0):
         """
         Initialize Gemini client.
 
         Args:
             api_key: Google API key (if None, reads from GOOGLE_API_KEY env var)
-            model_name: Gemini model identifier
+            model_name: Gemini model identifier (if None, reads from GEMINI_MODEL env var, defaults to gemini-2.0-flash-exp)
             temperature: Sampling temperature
         """
+        # Get model name from env if not provided
+        if model_name is None:
+            model_name = os.getenv("GEMINI_MODEL", "models/gemini-2.0-flash-exp")
+            print(f"Using Gemini model from environment: {model_name}")
+        else:
+            print(f"Using Gemini model from parameter: {model_name}")
+
         super().__init__(model_name, temperature)
 
         # Configure API
