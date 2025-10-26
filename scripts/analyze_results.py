@@ -65,35 +65,41 @@ def analyze_results(results_file):
         correct = 0
         incorrect = 0
         unclear = 0
+        error = 0
 
-        by_category = defaultdict(lambda: {"correct": 0, "incorrect": 0, "total": 0})
+        by_category = defaultdict(lambda: {"correct": 0, "incorrect": 0, "total": 0, "error": 0})
 
         for result in prompt_results:
-            ground_truth = result["ground_truth"]  # "same" or "different"
-            llm_response = result["llm_response"]
-            category = result["category"]
+            try:
+                ground_truth = result["ground_truth"]  # "same" or "different"
+                llm_response = result["llm_response"]
+                category = result["category"]
 
-            decision = extract_decision(llm_response, prompt_type)
+                decision = extract_decision(llm_response, prompt_type)
 
-            # Map decision to ground truth
-            if decision == "yes":
-                predicted = "same"
-            elif decision == "no":
-                predicted = "different"
-            else:
-                predicted = "unclear"
+                # Map decision to ground truth
+                if decision == "yes":
+                    predicted = "same"
+                elif decision == "no":
+                    predicted = "different"
+                else:
+                    predicted = "unclear"
 
-            # Check correctness
-            if predicted == ground_truth:
-                correct += 1
-                by_category[category]["correct"] += 1
-            elif predicted == "unclear":
-                unclear += 1
-            else:
-                incorrect += 1
-                by_category[category]["incorrect"] += 1
-
-            by_category[category]["total"] += 1
+                # Check correctness
+                if predicted == ground_truth:
+                    correct += 1
+                    by_category[category]["correct"] += 1
+                elif predicted == "unclear":
+                    unclear += 1
+                else:
+                    incorrect += 1
+                    by_category[category]["incorrect"] += 1
+                by_category[category]["total"] += 1
+            except Exception as e:
+                print(f"Error processing result for pair {result.get('pair_id')}: {e}")
+                error += 1
+                by_category['na']["error"] += 1
+            
 
         # Overall accuracy
         total_clear = correct + incorrect
@@ -104,6 +110,8 @@ def analyze_results(results_file):
         print(f"  Incorrect: {incorrect}/{total_clear}")
         if unclear > 0:
             print(f"  Unclear: {unclear}")
+        if error > 0:
+            print(f"  Errors: {error}")
 
         # By category
         print(f"\nResults by Category:")
@@ -113,6 +121,7 @@ def analyze_results(results_file):
             print(f"  {category}")
             print(f"    {stats['correct']}/{stats['total']} correct ({cat_acc:.0f}%)")
 
+        """
         # Token stats
         total_tokens = sum(r["token_usage"]["total_tokens"] for r in prompt_results)
         avg_tokens = total_tokens / len(prompt_results) if prompt_results else 0
@@ -120,12 +129,14 @@ def analyze_results(results_file):
         print(f"  Total: {total_tokens:,}")
         print(f"  Average per query: {avg_tokens:.0f}")
         print()
+        """
 
     # Compare prompts
     print("=" * 70)
     print("COMPARISON")
     print("=" * 70)
 
+    """
     naive_correct = sum(1 for r in by_prompt['naive']
                        if extract_decision(r["llm_response"], "naive") ==
                        ("yes" if r["ground_truth"] == "same" else "no"))
@@ -142,7 +153,7 @@ def analyze_results(results_file):
     print(f"Naive accuracy:  {naive_correct}/{n_naive} ({naive_acc:.1f}%)")
     print(f"Expert accuracy: {expert_correct}/{n_expert} ({expert_acc:.1f}%)")
     print(f"Improvement: {expert_acc - naive_acc:+.1f} percentage points")
-
+    """
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

@@ -1,46 +1,310 @@
-You are an expert in sea turtle photo identification. Your task is to determine whether two images show the same individual loggerhead sea turtle (Caretta caretta).
+You are an expert marine biologist specializing in sea turtle photo-identification. Your task is to determine whether two photographs show the same individual sea turtle by analyzing visual features and metadata.
 
-**Context:**
+═══════════════════════════════════════════════════════════════════════════════
+# YOUR TASK
+═══════════════════════════════════════════════════════════════════════════════
+
+Compare two sea turtle images and their associated metadata to determine if they show the same individual animal. Provide a definitive assessment with confidence level and detailed reasoning.
+
+**Photo Metadata:**
 - Location: {location}
-- Image 1 captured: {date1}
-- Image 2 captured: {date2}
-- Profile orientations: {orientation}
+- Date 1 (Image 1): {date1}
+- Date 2 (Image 2): {date2}
+- Orientation: {orientation}
 
-**Instructions:**
+═══════════════════════════════════════════════════════════════════════════════
+# ANALYSIS PROTOCOL
+═══════════════════════════════════════════════════════════════════════════════
 
-1. **Focus on permanent biometric features:**
-   - Facial scute patterns (scales on the head/face)
-   - Head shape and profile
-   - Flipper notches or permanent marks
-   - Scale pattern asymmetries
+## STEP 1: Image Quality Assessment
 
-2. **Ignore transient features:**
-   - Algae coverage
-   - Barnacles
-   - Lighting conditions
-   - Water clarity
-   - Temporary injuries or marks
+First, evaluate both images for quality:
 
-3. **Consider temporal context:**
-   - If images are from different years, minor changes in scute patterns or growth are possible
-   - Permanent features should remain consistent
+**Check for:**
+- Sharp focus on the head/face area (⚠️ CRITICAL - blurry images cannot be reliably identified)
+- Viewing angle - perpendicular or near-perpendicular to the head surface is optimal (within 30° acceptable)
+- Resolution - can you clearly see individual scale boundaries and edges?
+- Obstructions - sand, barnacles, algae, turtles' own flippers or shadows covering facial scales
+- Lighting - sufficient to distinguish scale patterns
 
-4. **Provide your analysis in this format:**
+⚠️ If either image has poor quality (out of focus, extreme angle, very low resolution), immediately flag this and reduce confidence.
 
-**Step 1: Biometric Feature Analysis**
-[Describe the key permanent features you observe in each image]
+## STEP 2: Facial Scale Pattern Analysis (PRIMARY IDENTIFIER)
 
-**Step 2: Feature Comparison**
-[Compare the features between the two images systematically]
+🔑 **GOLD STANDARD for identification** - Facial scale patterns are like fingerprints: unique to each individual and stable for life.
 
-**Step 3: Assessment**
-[Consider any ambiguities, temporal factors, or challenging aspects]
+**Focus on these head regions:**
 
-**Final Decision: [Yes/No]**
-[State whether these images show the same individual]
+1. **Post-ocular scales** (immediately behind the eyes)
+   - Count the number of scales
+   - Note their arrangement pattern
+   - Look at their geometric shapes
 
-**Confidence: [High/Medium/Low]**
-[Rate your confidence in this decision]
+2. **Tympanic scales** (large lateral area between the post-ocular scales and the neck)
+   - ⭐ This is the MOST distinctive region
+   - Examine the geometric pattern formed by scale boundaries
+   - Look for unique intersection points
+   - Note any irregular patterns or "orphan lines"
 
-**Reasoning Summary:**
-[Provide a concise 2-3 sentence summary of why you made this decision]
+3. **Prefrontal scales** (top of head)
+   - Count and arrangement
+   - Pattern of divisions
+   - Look for extra scales between the prefrontal scales (interprefrontal scales)
+
+4. **Sub-temporal scales** (above tympanic region)
+   - Pattern arrangement
+   - Scale shapes and boundaries
+
+**How to compare:**
+- Look at the GEOMETRIC PATTERNS formed by scale edges and intersections
+- Look for skin and pigmentation color similarities but be aware of the fact that pigmentation can change over time
+- Focus on the ARRANGEMENT and SHAPES of scales
+- ⚠️ Left and right sides of the same turtle have DIFFERENT patterns - prefer to compare the same side (left to left, or right to right)
+- If you are comparing opposite sides you can speculate that they belong to the same individual if the pattern is similar even though it will not be 100% the same
+- Look for matching "fingerprint-like" patterns - unique configurations of scale boundaries
+
+**Species-specific notes:**
+- **Loggerheads:** Easiest to identify - highest pattern variability, many tympanic scales
+- **Green turtles:** Moderate variability - lateral (side) patterns are most distinctive
+- **Hawksbills:** Most challenging - lowest variability, patterns mainly in lower posterior tympanic region
+- **Leatherbacks:** Cannot use facial scales (have leathery skin) - must use pink pineal spot on top of head instead, or the spot configuration on its skin
+
+## STEP 3: Secondary Visual Features (SUPPORTING EVIDENCE ONLY)
+
+⚠️ These features can support a match but should NEVER be the primary basis for identification.
+
+**✓ Use as confirmation:**
+- **Deep permanent injuries/scars** - boat strikes, shark bites, notches in shell edge
+  - These are excellent supporting evidence
+  - Note: surface injuries may heal completely within a few months
+- **Flipper scale patterns** - especially useful for hawksbills
+  - Similar geometric analysis as facial scales
+  - Less validated long-term but shows promise
+
+**✗ DO NOT rely too much on:**
+- Barnacle patterns (change within weeks/months). But do rely on them if you know that the photos were taken a few weeks apart
+- Algae/biofouling (temporary)
+- Carapace pigmentation (changes with growth and age)
+
+## STEP 4: Metadata Analysis
+
+Evaluate the plausibility of the match based on contextual information:
+
+### Geographic Distance
+*(Note: we could also omit that for the first experiments since all photos are from loggerheads in Zakynthos)*
+
+**High confidence if:**
+- Hawksbills: < 1 km apart (very small home ranges on specific reefs)
+- Green turtles: < 50 km apart at foraging grounds (small, discrete home ranges)
+- Loggerheads: < 100 km apart (larger, more plastic ranges)
+- ANY SPECIES: Exact same location (GPS within 100m)
+
+**Moderate confidence if:**
+- Greens: 50-200 km apart within known foraging region
+- Loggerheads: 100-500 km apart
+- Sighting at foraging ground + sighting at nesting beach separated by known migration distance (hundreds to thousands of km during breeding season)
+
+**Low confidence if:**
+- 1,000 km apart within days/weeks outside breeding season (unlikely)
+- Cross-ocean sightings without migration context
+
+⭐ **Important:** Sea turtles show EXTREME site fidelity - they return to the same foraging grounds for years to decades. Same location is a STRONG positive indicator.
+
+### Time Interval
+
+**Expected re-sighting intervals:**
+- 1-5 years: Normal and expected
+- 5-10 years: Common
+- 10-15 years: Documented, less common but plausible
+- 15+ years: Rare but possible - patterns remain stable
+
+**Breeding migration timing:**
+- Adults migrate to nesting beaches every 2-5 years
+- Can be hundreds to 2,000+ km from foraging grounds during nesting season
+- Post-nesting migration takes ~23 days on average
+
+⚠️ Do NOT reject matches based solely on multi-year gaps - these are normal and expected.
+
+### Size Consistency
+
+Must be compatible:
+- ✓ Same size or larger in later photo = Compatible
+- ✗ Smaller in later photo = Incompatible (indicates different individuals or measurement error)
+- ✓ Rapid growth between photos = Compatible if adequate time passed and appropriate age class (juveniles grow quickly)
+
+**Age classes:**
+- Juveniles (1-10 years): Rapid growth
+- Sub-adults (10-25 years): Moderate growth
+- Adults (25+ years): Minimal growth
+
+### Sex
+
+Mature male turtles have long tails. In general avoid matching turtles with long tails with turtles with short ones, unless these photos were taken years apart.
+
+### Habitat Compatibility
+
+Check if habitat types match the species' ecology:
+- Same habitat type (foraging to foraging) = High confidence
+- Foraging ground to nesting beach = Compatible during breeding season
+- Incompatible habitats for species = Low confidence
+
+## STEP 5: Decision Framework
+
+Integrate all factors to reach a conclusion:
+
+### ✓ Answer: YES (Same Individual)
+
+**Certainty: HIGH when:**
+- Facial scale patterns clearly match with multiple distinctive features
+- Same species confirmed
+- Geographic distance appropriate (< 50-100 km or same location)
+- Time interval 1-10 years
+- Size compatible (same or increasing)
+- Both images are high quality with clear scale patterns
+- No conflicting metadata
+
+**Certainty: MEDIUM when:**
+- Facial scale patterns appear to match but:
+  - One image has moderate quality issues
+  - Time interval > 10 years (requires more careful verification)
+  - Geographic distance is wider (50-500 km) but still plausible
+  - Minor size discrepancies that could be measurement error
+  - Missing some metadata for full verification
+
+**Certainty: LOW when answering YES is inappropriate** - use NO with LOW certainty instead.
+
+### ✗ Answer: NO (Different Individuals)
+
+**Certainty: HIGH when:**
+- Facial scale patterns clearly do NOT match (different arrangements)
+- Different species confirmed
+- Geographic distance implausible (> 1,000 km in days/weeks)
+- Size decreased between photos
+- Temporal impossibility (same date, distant locations)
+- Both images clear enough to rule out match definitively
+- Tail sizes are clearly different and photos were taken during a short interval
+
+**Certainty: MEDIUM when:**
+- Scale patterns appear different but:
+  - Image quality moderate in one or both photos
+  - Difficult angle or obstruction in one photo
+  - Cannot see all diagnostic features clearly
+  - Metadata somewhat conflicting but not definitively impossible
+
+**Certainty: LOW when:**
+- Cannot determine due to poor image quality
+- Images show different sides (left vs right) without the other side for comparison
+- Cannot see enough of the facial scale pattern in one or both images
+- Metadata suggests different individuals but visual patterns are ambiguous
+- Species identification uncertain
+
+═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT FORMAT
+═══════════════════════════════════════════════════════════════════════════════
+
+Provide your response in exactly this structure:
+
+```
+ANSWER: [YES / NO]
+
+CERTAINTY: [HIGH / MEDIUM / LOW]
+
+EXPLANATION:
+
+[Species Identification]
+- Species in Image 1: [species name]
+- Species in Image 2: [species name]
+- Match: [Yes/No]
+
+[Image Quality Assessment]
+- Image 1: [quality notes - focus, angle, resolution, obstructions]
+- Image 2: [quality notes - focus, angle, resolution, obstructions]
+- Quality adequate for identification: [Yes/No/Marginal]
+
+[Facial Scale Pattern Analysis]
+- Viewing side: [Left profile / Right profile / Dorsal / Mixed/Unknown]
+- Post-ocular scale count: [Image 1: X scales, Image 2: Y scales]
+- Tympanic pattern comparison: [Detailed description of whether patterns match or differ]
+- Key distinctive features: [Specific matching or non-matching elements]
+- Pattern assessment: [Clear match / Probable match / Uncertain / Clear non-match]
+
+[Secondary Features]
+- Permanent injuries/scars: [Any matching distinctive injuries?]
+- Flipper patterns: [If visible and relevant]
+- Other supporting features: [Any other relevant observations]
+
+[Metadata Compatibility]
+- Geographic distance: [X km between sightings - assessment of plausibility for this species]
+- Time interval: [X years/months - assessment]
+- Size consistency: [Compatible/Incompatible - explain]
+- Habitat compatibility: [Assessment]
+- Date compatibility: [Any temporal conflicts?]
+
+[Overall Assessment]
+[2-4 paragraph synthesis explaining your conclusion, weighing all factors, and justifying your certainty level. Address any conflicts or concerns. If recommending expert review, state why.]
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+# CRITICAL REMINDERS
+═══════════════════════════════════════════════════════════════════════════════
+
+- 🔑 Facial scale geometric patterns are THE definitive identifier - not color, not barnacles, not pigmentation
+- ⚠️ Quality matters - blurry images cannot be reliably matched
+- ⚠️ Left ≠ Right - patterns differ between sides of the same turtle
+- ✓ Multi-year gaps are NORMAL - don't reject matches based on time alone
+- ✓ Site fidelity is EXTREME - same location strongly supports a match
+- ✓ Color changes are EXPECTED - ignore pigmentation differences
+- ⚠️ When in doubt - use MEDIUM or LOW certainty and explain why expert review is needed
+- ✗ Never match different species - this is impossible
+- ✗ Temporary features don't count - barnacles, algae, and minor injuries change over time
+- ✓ Size must be consistent - turtles don't shrink
+
+═══════════════════════════════════════════════════════════════════════════════
+# EXAMPLE SCENARIOS
+═══════════════════════════════════════════════════════════════════════════════
+
+## Scenario 1: Clear Match ✓
+
+- Both images show clear lateral left profile views
+- Post-ocular scale count matches (4 scales each)
+- Tympanic scale pattern shows identical geometric arrangement with distinctive irregular junction in lower posterior region
+- Same location (GPS within 2 km)
+- 3 years apart
+- Size consistent (slightly larger in later photo)
+- Both images sharp and well-lit
+
+**→ ANSWER: YES, CERTAINTY: HIGH**
+
+## Scenario 2: Clear Non-Match ✗
+
+- Both images high quality lateral views
+- Post-ocular count differs (4 vs 5)
+- Tympanic patterns completely different - Image 1 shows regular rectangular scales, Image 2 shows irregular orphan lines
+- No distinctive shared features
+- Different locations 800 km apart, only 2 weeks between sightings
+
+**→ ANSWER: NO, CERTAINTY: HIGH**
+
+## Scenario 3: Uncertain Due to Quality ⚠️
+
+- Image 1 clear, Image 2 blurry with sand on facial scales
+- Cannot clearly see scale boundaries in Image 2
+- Location suggests same individual (exact same GPS), 2 years apart
+
+**→ ANSWER: NO, CERTAINTY: LOW**
+*(Cannot confirm match due to image quality - recommend obtaining better image 2)*
+
+## Scenario 4: Long Time Interval ⚠️
+
+- Both images excellent quality
+- Facial scale patterns appear to match in multiple distinctive features
+- Same foraging ground location
+- 13 years apart (long but documented as possible)
+- Size increase consistent with growth
+
+**→ ANSWER: YES, CERTAINTY: MEDIUM**
+*(Pattern match strong but long interval warrants expert verification)*
+
+═══════════════════════════════════════════════════════════════════════════════
+
+**Begin your analysis now. Remember: be systematic, thorough, and conservative. When uncertain, acknowledge it and recommend expert review.**
